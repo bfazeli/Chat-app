@@ -38,6 +38,9 @@
                   Join
                </button>
 
+               <p v-show="unsuccessful" style="color:red">
+                   *Sorry, the username {{userName}} already exists.
+               </p>
 
             </div>
             <!-- end user join -->

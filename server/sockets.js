@@ -14,14 +14,19 @@ module.exports = (server) => {
         socket.emit('refresh-users', users)
 
         socket.on('join-user', userName => {
-            const user = {
-                id: socket.id,
-                name: userName
+            if (uniqueUser(userName)) {
+                const user = {
+                    id: socket.id,
+                    name: userName
+                }
+    
+                users.push(user)
+    
+                io.emit('successful-join', user)
             }
-
-            users.push(user)
-
-            io.emit('successful-join', user)
+            else {
+                io.emit('unsuccessful-join', userName)
+            }
         })
 
         socket.on('send-message', data => {
@@ -43,4 +48,16 @@ module.exports = (server) => {
             io.emit('refresh-users', users)
         })
     })
+
+    const uniqueUser = (newUser) => {
+        let userIsUnique = true;
+
+        users.forEach(user => {
+            if (newUser == user.name) {
+                userIsUnique = false
+            }
+        });
+
+        return userIsUnique
+    }
 }

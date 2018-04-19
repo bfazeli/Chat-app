@@ -34,6 +34,7 @@ const app = new Vue({
     el: '#chat-app',
     data: {
         loggedIn: false,
+        unsuccessful: false,
         userName: '',
         user: {},
         users: [],
@@ -76,8 +77,12 @@ socket.on('successful-join', user => {
         app.user = user
         app.loggedIn = true
     }
-
+    app.unsuccessful = false
     app.users.push(user)
+})
+
+socket.on('unsuccessful-join', user => {
+    app.unsuccessful = true
 })
 
 socket.on('successful-message', content => {
