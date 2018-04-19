@@ -17,7 +17,8 @@ module.exports = (server) => {
             if (uniqueUser(userName)) {
                 const user = {
                     id: socket.id,
-                    name: userName
+                    name: userName,
+                    img: `https://robohash.org/${userName}?set=set3`
                 }
     
                 users.push(user)
@@ -35,6 +36,7 @@ module.exports = (server) => {
                 message: data.message,
                 date: moment(new Date()).format('MM/DD/YY h:mm a')
             }
+
             messages.push(content)
 
             io.emit('successful-message', content)
@@ -53,7 +55,7 @@ module.exports = (server) => {
         let userIsUnique = true;
 
         users.forEach(user => {
-            if (newUser == user.name) {
+            if (newUser.toLowerCase() == user.name.toLowerCase()) {
                 userIsUnique = false
             }
         });
