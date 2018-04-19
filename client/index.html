@@ -27,6 +27,8 @@
 
          <!-- users column -->
          <div class="col s3">
+            <!-- Welcome comp -->
+            <welcome-component v-bind:user="user"></welcome-component>
 
             <!-- active users component-->
             <users-component v-bind:users="users"></users-component>
@@ -38,7 +40,7 @@
                   Join
                </button>
 
-               <p v-show="unsuccessful" style="color:red">
+               <p v-show="unsuccessful" class="failed">
                    *Sorry, the username {{userName}} already exists.
                </p>
 

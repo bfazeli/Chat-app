@@ -27,7 +27,14 @@ const usersComponent = {
 }
 
 // Welcome Component
-
+const welcomeComponent = {
+    template: `<div class="me h5" style="text-align: center" v-if=user.name>
+                    <h3>Welcome</h3>
+                    <img class="circle" v-bind:src=user.img width=30%>
+                    <h4>{{user.name}}</h4>
+                </div>`,
+    props: ['user']
+}
 
 const socket = io()
 const app = new Vue({
@@ -57,7 +64,8 @@ const app = new Vue({
     },
     components: {
         'users-component': usersComponent,
-        'chat-component': chatComponent
+        'chat-component': chatComponent,
+        'welcome-component': welcomeComponent
     }
 })
 
